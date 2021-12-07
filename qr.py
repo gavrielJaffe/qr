@@ -1,4 +1,6 @@
 
+import math
+
 def left_top(matrix):
     for x in range(6):#top
         matrix[0][x] = 1  
@@ -100,32 +102,48 @@ def make_mask(matrix):
 # def error_correction():
     #get 5 place to change.
     
+def text_binary(string):
+    size =  len(string)
 
+
+def toBinary(a):
+  l,m=[],[]
+  for i in a:
+    l.append(ord(i))
+  for i in l:
+    m.append(int(bin(i)[2:]))
+  return m
+
+def pair_binary_number(fires_char,second_char):
+     
+     firest = toBinary(fires_char)
+     second = toBinary(second_char)
+     print ("line 120: \n ",firest,second)
+
+def send_pair(qr_string):
+    for i in range(len(qr_string)):
+        if (i % 2 != 0):
+            pair_binary_number(qr_string[i-1],qr_string[i])  
+        if ( i == len(qr_string)-1 and i %2 == 0):
+            # do somting on the last char ,we
+            print("do somting on the last char 129")
+        
 def mask(matrix_mask):
     for i in range(21):
         for j in range(21):
-            if ((i+j)%2==0):
-            # if(((i*j)%3 +i +j) %2 == 0):
-                matrix_mask [i][j] = 1 
-                # print ("hi is working")
-
+            if ((i+j)% 3==0):
+                matrix_mask [i][j] = 1                 
 
 def main():
     qr_string = input("enter a string :\n")
+    count_string = len(qr_string)
+    print("count_string :",count_string)
     print ("answer:",qr_string)
-
-    string = qr_string
-    # string with encoding 'utf-8'
-    arr = bytes(string, 'utf-8')
-    arr2 = bytes(string, 'ascii')
-
-    print(arr,'\n')
-    # actual bytes in the the string
-    for byte in arr:
-        print(byte, end=' ')
-    print("\n")
-    for byte in arr2:
-        print(byte, end=' ')
+    toBinary(qr_string)
+    print(toBinary(qr_string))
+    send_pair(qr_string)
+    # print("string in Binary",toBinary(count_string))
+    toBinary(str(count_string))
 
     print("")
     matrix = [[0 for i in range(21)] for j in range(21)]
@@ -139,14 +157,10 @@ def main():
     level_q(matrix)
     make_mask(matrix)
     print_matrix(matrix) # output matrix.
+
     print("")
-
-
-    mask(matrix_mask)
-    print_matrix(matrix_mask) # output matrix _ mask.
-
-
-
+    # mask(matrix_mask)
+    # print_matrix(matrix_mask) # output matrix _ mask.
     
 if __name__=='__main__':
     main()
