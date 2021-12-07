@@ -1,4 +1,3 @@
-
 import math
 
 def left_top(matrix):
@@ -105,7 +104,6 @@ def make_mask(matrix):
 def text_binary(string):
     size =  len(string)
 
-
 def toBinary(a):
   l,m=[],[]
   for i in a:
@@ -134,18 +132,49 @@ def mask(matrix_mask):
             if ((i+j)% 3==0):
                 matrix_mask [i][j] = 1                 
 
+def get_ascii_value(qr_string):
+    list_ascii = []
+    string = qr_string
+    # string with encoding 'utf-8'
+    arr = bytes(string, 'utf-8')
+    arr2 = bytes(string, 'ascii')
+
+    print(arr,'\n')
+    # actual bytes in the the string
+    for byte in arr:
+        print(byte, end=' ')
+        # print(byte," :146")
+        list_ascii.append(byte) 
+    print("\n")
+    return list_ascii
+    #ascii value
+
+def upper(string):
+    string.upper()
+    return string 
+
+def ascii_to_alphanumeric(list_ascii):
+    for i in range(len(list_ascii)):
+        list_ascii[i] = list_ascii[i]-55
+        print("list_ascii",list_ascii[i]) 
+        print("work") 
+    return list_ascii
+
 def main():
-    qr_string = input("enter a string :\n")
+    qr_string = input("enter a string in upper case only :\n")
     count_string = len(qr_string)
     print("count_string :",count_string)
     print ("answer:",qr_string)
-    toBinary(qr_string)
+    
     print(toBinary(qr_string))
     send_pair(qr_string)
-    # print("string in Binary",toBinary(count_string))
     toBinary(str(count_string))
+    ascii_list= get_ascii_value(qr_string)
+    print(ascii_list,"x:\n")
 
-    print("")
+    # ascii_to_alphanumeric(ascii_list)
+    print("177 :",ascii_to_alphanumeric(ascii_list))
+    
     matrix = [[0 for i in range(21)] for j in range(21)]
     matrix_mask = [[0 for i in range(21)] for j in range(21)] 
     matrix[0][0] = 1
@@ -156,7 +185,7 @@ def main():
     timing_stretcher(matrix)
     level_q(matrix)
     make_mask(matrix)
-    print_matrix(matrix) # output matrix.
+    # print_matrix(matrix) # output matrix.
 
     print("")
     # mask(matrix_mask)
