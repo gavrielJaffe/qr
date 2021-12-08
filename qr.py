@@ -172,7 +172,6 @@ def pair_to_calculat(value_to_calculat):
 
 def get_input_to_binary():
     qr_string = input("enter a string in upper case only :\n")
-    # while not (qr_string.isupper()):
     pattern = '^[A-Z0-9]*$'  
     while not(re.search(pattern,qr_string)):
         qr_string = input("enter a string in upper case only :\n")
