@@ -1,6 +1,7 @@
 import math
+import re
 
-def left_top(matrix):
+def top_left(matrix):
     for x in range(6):#top
         matrix[0][x] = 1  
     for x in range(6):#left
@@ -147,10 +148,6 @@ def get_ascii_value(qr_string):
     return list_ascii
     #ascii value
 
-def upper(string):
-    string.upper()
-    return string 
-
 def ascii_to_alphanumeric(list_ascii):
     #get ascii list and make it to alphanumeric.
     #action for letters between A-Z 
@@ -159,7 +156,7 @@ def ascii_to_alphanumeric(list_ascii):
         list_ascii[i] = list_ascii[i]-55
         print("list_ascii",list_ascii[i])
     #need to do action for spectioal caractor. 
-    # $ 37 ,% 38 ,* 39 ,+ 40 , - 41 etc.
+    # $ 37 ,% 38 ,* 39 ,+ 40 , - 41 ect.
     # . 42
     # / 43
     # : 44  
@@ -172,8 +169,15 @@ def pair_to_calculat(value_to_calculat):
             second = value_to_calculat[i]
             sum = (firest * 45)+ second
             return sum
+
 def get_input_to_binary():
     qr_string = input("enter a string in upper case only :\n")
+    # while not (qr_string.isupper()):
+    pattern = '^[A-Z0-9]*$'  
+    while not(re.search(pattern,qr_string)):
+        qr_string = input("enter a string in upper case only :\n")
+
+
     count_string = len(qr_string)
     print("count_string :",count_string)
     print ("answer:",qr_string)
@@ -201,7 +205,7 @@ def main():
     matrix_mask = [[0 for i in range(21)] for j in range(21)] 
     matrix[0][0] = 1
     matrix[19][20] = 1
-    left_top(matrix)
+    top_left(matrix)
     top_right(matrix)
     bot_left(matrix)
     timing_stretcher(matrix)
@@ -215,5 +219,4 @@ def main():
     
 if __name__=='__main__':
     main()
-
     # test(matrix  ,top_left=(0,0) ,top_right=(6,0) ,bot_left=(0,6), bot_right=(6,6))
