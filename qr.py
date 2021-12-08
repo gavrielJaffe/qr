@@ -97,9 +97,6 @@ def make_mask(matrix):
     #top
     matrix [8][2] = 1
     matrix [8][4] = 1
-
-# def error_correction():
-    #get 5 place to change.
     
 def text_binary(string):
     size =  len(string)
@@ -123,10 +120,11 @@ def send_pair(qr_string):
         if (i % 2 != 0):
             pair_binary_number(qr_string[i-1],qr_string[i])  
         if ( i == len(qr_string)-1 and i %2 == 0):
-            # do somting on the last char ,we
+            # do somting on the last char ,
             print("do somting on the last char 129")
         
 def mask(matrix_mask):
+    #creat mask
     for i in range(21):
         for j in range(21):
             if ((i+j)% 3==0):
@@ -154,26 +152,50 @@ def upper(string):
     return string 
 
 def ascii_to_alphanumeric(list_ascii):
+    #get ascii list and make it to alphanumeric.
+    #action for letters between A-Z 
     for i in range(len(list_ascii)):
+        
         list_ascii[i] = list_ascii[i]-55
-        print("list_ascii",list_ascii[i]) 
-        print("work") 
+        print("list_ascii",list_ascii[i])
+    #need to do action for spectioal caractor. 
+    # $ 37 ,% 38 ,* 39 ,+ 40 , - 41 etc.
+    # . 42
+    # / 43
+    # : 44  
     return list_ascii
 
-def main():
+def pair_to_calculat(value_to_calculat):
+    for i in range(len(value_to_calculat)):
+        if (i % 2 != 0):
+            firest = value_to_calculat[i-1]
+            second = value_to_calculat[i]
+            sum = (firest * 45)+ second
+            return sum
+def get_input_to_binary():
     qr_string = input("enter a string in upper case only :\n")
     count_string = len(qr_string)
     print("count_string :",count_string)
     print ("answer:",qr_string)
-    
-    print(toBinary(qr_string))
+    print("174",toBinary(qr_string))
     send_pair(qr_string)
+
+    print ("use of send pair line 177" , send_pair(qr_string))
     toBinary(str(count_string))
     ascii_list= get_ascii_value(qr_string)
     print(ascii_list,"x:\n")
 
-    # ascii_to_alphanumeric(ascii_list)
-    print("177 :",ascii_to_alphanumeric(ascii_list))
+    value_to_calculat  = ascii_to_alphanumeric(ascii_list)
+    # print("177 :",ascii_to_alphanumeric(ascii_list))
+    print("value is list :",value_to_calculat)
+    sum = pair_to_calculat(value_to_calculat)
+    print("sum :",sum)
+    
+    sum_in_binary = toBinary(str(sum))
+    print("sum in binary:",sum_in_binary)
+
+def main():
+    get_input_to_binary()
     
     matrix = [[0 for i in range(21)] for j in range(21)]
     matrix_mask = [[0 for i in range(21)] for j in range(21)] 
@@ -184,7 +206,7 @@ def main():
     bot_left(matrix)
     timing_stretcher(matrix)
     level_q(matrix)
-    make_mask(matrix)
+    make_mask(matrix)  
     # print_matrix(matrix) # output matrix.
 
     print("")
